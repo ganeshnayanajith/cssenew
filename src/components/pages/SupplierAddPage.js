@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {MDBBtn, MDBCard, MDBCardBody, MDBCol, MDBContainer, MDBRow} from "mdbreact";
 import FirebaseDB from "../../Firebase";
 import Swal from 'sweetalert';
@@ -33,33 +33,36 @@ class SupplierAddPage extends Component {
             name: e.target.value
         });
     }
+
     onChangeEmail(e) {
         this.setState({
             email: e.target.value
         });
     }
+
     onChangeContact(e) {
         this.setState({
             contact: e.target.value
         });
     }
+
     onChangeAddress(e) {
         this.setState({
             address: e.target.value
         });
     }
 
-    onSubmit(e){
+    onSubmit(e) {
 
 
-        console.log("name : "+this.state.name+ '\n' +
-            "email : "+this.state.email+ '\n' +
-            "contact : "+this.state.contact+ '\n' +
-            "address : "+this.state.address+ '\n'
+        console.log("name : " + this.state.name + '\n' +
+            "email : " + this.state.email + '\n' +
+            "contact : " + this.state.contact + '\n' +
+            "address : " + this.state.address + '\n'
         );
 
 
-        const supplier={
+        const supplier = {
             name: this.state.name,
             email: this.state.email,
             contact: this.state.contact,
@@ -73,13 +76,20 @@ class SupplierAddPage extends Component {
 
 
                         this.database.push().set(supplier)
-                            .then(response=>{
+                            .then(response => {
                                 console.log(response);
+
+                                this.setState({
+                                    name: '',
+                                    email: '',
+                                    contact: '',
+                                    address: ''
+                                });
+
                             })
-                            .catch(error=>{
+                            .catch(error => {
                                 console.log(error);
                             });
-
 
 
                     } else {
@@ -152,7 +162,8 @@ class SupplierAddPage extends Component {
                                         className="form-control"
                                     />
                                     <div className="text-center mt-4">
-                                        <MDBBtn color="indigo" type="button" onClick={this.onSubmit}>Add Supplier</MDBBtn>
+                                        <MDBBtn color="indigo" type="button" onClick={this.onSubmit}>Add
+                                            Supplier</MDBBtn>
                                     </div>
                                 </form>
                             </MDBCardBody>
