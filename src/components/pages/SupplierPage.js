@@ -7,70 +7,36 @@ class SupplierPage extends React.Component {
     constructor(props) {
         super(props);
 
-        this.database = FirebaseDB.database().ref().child('suppliers');
-
         this.onClick = this.onClick.bind(this);
 
         this.state = {
-            data: {
-                columns: [
-                    {
-                        label: 'Name',
-                        field: 'name',
-                        sort: 'asc',
-                        width: 150
-                    },
-                    {
-                        label: 'Position',
-                        field: 'position',
-                        sort: 'asc',
-                        width: 270
-                    },
-                    {
-                        label: 'Office',
-                        field: 'office',
-                        sort: 'asc',
-                        width: 200
-                    },
-                    {
-                        label: 'Age',
-                        field: 'age',
-                        sort: 'asc',
-                        width: 100
-                    },
-                    {
-                        label: 'Start date',
-                        field: 'date',
-                        sort: 'asc',
-                        width: 150
-                    },
-                    {
-                        label: 'Salary',
-                        field: 'salary',
-                        sort: 'asc',
-                        width: 100
-                    }
-                ],
-                rows: [
-                    {
-                        name: 'Tiger Nixon',
-                        position: 'System Architect',
-                        office: 'Edinburgh',
-                        age: '61',
-                        date: '2011/04/25',
-                        salary: '$320'
-                    },
-                    {
-                        name: 'Garrett Winters',
-                        position: 'Accountant',
-                        office: 'Tokyo',
-                        age: '63',
-                        date: '2011/07/25',
-                        salary: '$170'
-                    }
-                ]
-            }
-        }//end of this.state
+            suppliers: [],
+            rows: [],
+            columns: [
+                {
+                    label: 'ID',
+                    field: 'id'
+                },
+                {
+                    label: 'Name',
+                    field: 'name'
+                },
+                {
+                    label: 'Email',
+                    field: 'email'
+                },
+                {
+                    label: 'Contact',
+                    field: 'contact'
+                },
+                {
+                    label: 'Address',
+                    field: 'address'
+                }
+            ]
+
+        }
+
     }//end of constructor
 
     onClick() {
@@ -80,6 +46,60 @@ class SupplierPage extends React.Component {
         this.props.history.push("/supplieradd");
     };
 
+
+    componentDidMount() {
+        document.title = "Suppliers";
+        const suppliersRef = FirebaseDB.database().ref('suppliers');
+        suppliersRef.on('value', (snapshot) => {
+            var suppliers = snapshot.val();
+            var newsuppliers = [];
+            for (let supplier in suppliers) {
+                newsuppliers.push({
+                    id:supplier,
+                    name: suppliers[supplier].name,
+                    email: suppliers[supplier].email,
+                    contact: suppliers[supplier].contact,
+                    address: suppliers[supplier].address,
+                });
+            }
+            this.setState({
+                rows: newsuppliers,
+            });
+            this.setState({
+                data: {
+                    columns: this.state.columns,
+                    rows: this.state.rows
+                }
+            });
+        });
+    };
+
+    componentWillMount() {
+        document.title = "Suppliers";
+        const suppliersRef = FirebaseDB.database().ref('suppliers');
+        suppliersRef.on('value', (snapshot) => {
+            var suppliers = snapshot.val();
+            var newsuppliers = [];
+            for (let supplier in suppliers) {
+                newsuppliers.push({
+                    id:supplier,
+                    name: suppliers[supplier].name,
+                    email: suppliers[supplier].email,
+                    contact: suppliers[supplier].contact,
+                    address: suppliers[supplier].address,
+                });
+            }
+            this.setState({
+                rows: newsuppliers,
+            });
+            this.setState({
+                data: {
+                    columns: this.state.columns,
+                    rows: this.state.rows
+                }
+            });
+        });
+    };
 
     render() {
 

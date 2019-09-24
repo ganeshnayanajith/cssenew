@@ -86,6 +86,8 @@ class SupplierAddPage extends Component {
                                     address: ''
                                 });
 
+                                Swal("Success !", "Supplier Added Sucessfull !", "success");
+
                             })
                             .catch(error => {
                                 console.log(error);

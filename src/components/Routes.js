@@ -5,7 +5,6 @@ import SupplierPage from './pages/SupplierPage';
 import SupplierAddPage from './pages/SupplierAddPage';
 import ProfilePage from './pages/ProfilePage';
 import TablesPage from './pages/TablesPage';
-import MapsPage from './pages/MapsPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 class Routes extends React.Component {
@@ -18,7 +17,6 @@ class Routes extends React.Component {
                 <Route path='/supplieradd' component={SupplierAddPage}/>
                 <Route path='/profile' component={ProfilePage}/>
                 <Route path='/tables' component={TablesPage}/>
-                <Route path='/maps' component={MapsPage}/>
                 <Route path='/404' component={NotFoundPage}/>
             </Switch>
         );

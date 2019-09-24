@@ -34,12 +34,6 @@ const TopNavigation = () => {
                         Tables
                     </MDBListGroupItem>
                 </NavLink>
-                <NavLink to="/maps" activeClassName="activeClass">
-                    <MDBListGroupItem>
-                        <MDBIcon icon="map" className="mr-3"/>
-                        Maps
-                    </MDBListGroupItem>
-                </NavLink>
                 <NavLink to="/404" activeClassName="activeClass">
                     <MDBListGroupItem>
                         <MDBIcon icon="exclamation" className="mr-3"/>
