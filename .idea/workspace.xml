@@ -4,11 +4,7 @@
     <list default="true" id="719d8b01-8e84-4dea-9a16-bd06b2fba162" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages/DashboardPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/DashboardPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages/MapsPage.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/pages/SupplierPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/SupplierPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages/sections/MapSection.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/sideNavigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/sideNavigation.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -59,7 +55,7 @@
       <option name="presentableId" value="Default" />
       <updated>1569269187427</updated>
       <workItem from="1569269189538" duration="1765000" />
-      <workItem from="1569291556971" duration="19249000" />
+      <workItem from="1569291556971" duration="21193000" />
     </task>
     <servers />
   </component>

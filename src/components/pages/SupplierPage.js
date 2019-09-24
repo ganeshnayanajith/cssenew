@@ -8,15 +8,12 @@ class SupplierPage extends React.Component {
         super(props);
 
         this.onClick = this.onClick.bind(this);
+        this.addItem = this.addItem.bind(this);
 
         this.state = {
             suppliers: [],
             rows: [],
             columns: [
-                {
-                    label: 'ID',
-                    field: 'id'
-                },
                 {
                     label: 'Name',
                     field: 'name'
@@ -32,7 +29,12 @@ class SupplierPage extends React.Component {
                 {
                     label: 'Address',
                     field: 'address'
+                },
+                {
+                    label: 'Action',
+                    field: 'action'
                 }
+
             ]
 
         }
@@ -45,6 +47,13 @@ class SupplierPage extends React.Component {
 
         this.props.history.push("/supplieradd");
     };
+    addItem(e) {
+
+        console.log(e.target.id);
+        this.props.history.push("/supplieradditem");
+
+    };
+
 
 
     componentDidMount() {
@@ -55,11 +64,11 @@ class SupplierPage extends React.Component {
             var newsuppliers = [];
             for (let supplier in suppliers) {
                 newsuppliers.push({
-                    id:supplier,
                     name: suppliers[supplier].name,
                     email: suppliers[supplier].email,
                     contact: suppliers[supplier].contact,
                     address: suppliers[supplier].address,
+                    action:<MDBBtn color="purple" size="sm" id={supplier} onClick={this.addItem}>Add Item</MDBBtn>
                 });
             }
             this.setState({
@@ -82,11 +91,11 @@ class SupplierPage extends React.Component {
             var newsuppliers = [];
             for (let supplier in suppliers) {
                 newsuppliers.push({
-                    id:supplier,
                     name: suppliers[supplier].name,
                     email: suppliers[supplier].email,
                     contact: suppliers[supplier].contact,
                     address: suppliers[supplier].address,
+                    action:<MDBBtn color="purple" size="sm" id={supplier} onClick={this.addItem}>Add Item</MDBBtn>
                 });
             }
             this.setState({
