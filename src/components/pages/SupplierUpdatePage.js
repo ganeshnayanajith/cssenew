@@ -4,13 +4,13 @@ import FirebaseDB from "../../Firebase";
 import Swal from 'sweetalert';
 
 
-class SupplierAddPage extends Component {
+class SupplierUpdatePage extends Component {
 
 
     constructor(props) {
         super(props);
 
-        this.database = FirebaseDB.database().ref().child('suppliers');
+        this.suppliersRef = "";
 
         this.onChangeName = this.onChangeName.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
@@ -20,11 +20,46 @@ class SupplierAddPage extends Component {
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
+            supplierId: '',
             name: '',
             email: '',
             contact: '',
             address: ''
         }
+
+    }
+
+
+    componentDidMount() {
+
+
+        document.title = "Update Supplier";
+
+        let currentUrl = window.location.href;
+        let supplierId = (currentUrl.split('/')[4]);
+        console.log(currentUrl);
+        console.log(supplierId);
+        this.setState({
+            supplierId: supplierId
+        });
+
+
+        this.suppliersRef = FirebaseDB.database().ref('suppliers/' + supplierId);
+        this.suppliersRef.on('value', (snapshot) => {
+
+
+            console.log(snapshot.val());
+            var supplier = snapshot.val();
+
+            this.setState({
+                name: supplier.name,
+                email: supplier.email,
+                contact: supplier.contact,
+                address: supplier.address
+            });
+
+        });
+
 
     }
 
@@ -75,7 +110,12 @@ class SupplierAddPage extends Component {
                     if (this.state.address !== '' && this.state.address !== null) {
 
 
-                        this.database.push().set(supplier)
+                        this.suppliersRef.update({
+                            name: this.state.name,
+                            email: this.state.email,
+                            contact: this.state.contact,
+                            address: this.state.address
+                        })
                             .then(response => {
                                 console.log(response);
 
@@ -86,7 +126,8 @@ class SupplierAddPage extends Component {
                                     address: ''
                                 });
 
-                                Swal("Success !", "Supplier Added Successfully !", "success");
+                                Swal("Success !", "Supplier Updated Successfully !", "success");
+                                this.props.history.push("/supplier");
 
                             })
                             .catch(error => {
@@ -119,7 +160,7 @@ class SupplierAddPage extends Component {
                         <MDBCard>
                             <MDBCardBody>
                                 <form>
-                                    <p className="h4 text-center mb-4">Add A Supplier</p>
+                                    <p className="h4 text-center mb-4">Update Supplier</p>
                                     <label className="grey-text">
                                         Full Name
                                     </label>
@@ -164,7 +205,7 @@ class SupplierAddPage extends Component {
                                         className="form-control"
                                     />
                                     <div className="text-center mt-4">
-                                        <MDBBtn color="indigo" type="button" onClick={this.onSubmit}>Add
+                                        <MDBBtn color="indigo" type="button" onClick={this.onSubmit}>Update
                                             Supplier</MDBBtn>
                                     </div>
                                 </form>
@@ -181,4 +222,4 @@ class SupplierAddPage extends Component {
 };
 
 
-export default SupplierAddPage;
+export default SupplierUpdatePage;

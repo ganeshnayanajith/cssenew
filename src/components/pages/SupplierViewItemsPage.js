@@ -104,7 +104,6 @@ class SupplierViewItemsPage extends React.Component {
 
 
         const suppliersRef = FirebaseDB.database().ref('suppliers/'+supplierId+'/items');
-        //const itemRef=suppliersRef.child(this.state.supplierId).child("items");
         suppliersRef.on('value', (snapshot) => {
 
 

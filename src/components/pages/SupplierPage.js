@@ -10,6 +10,7 @@ class SupplierPage extends React.Component {
         this.onClick = this.onClick.bind(this);
         this.addItem = this.addItem.bind(this);
         this.viewItems = this.viewItems.bind(this);
+        this.updateSupplier = this.updateSupplier.bind(this);
 
         this.state = {
             data: [],
@@ -63,6 +64,10 @@ class SupplierPage extends React.Component {
         console.log(e.target.id);
         this.props.history.push("/supplierviewitems/"+e.target.id);
     };
+    updateSupplier(e) {
+        console.log(e.target.id);
+        this.props.history.push("/supplierupdate/"+e.target.id);
+    };
 
 
 
@@ -80,7 +85,7 @@ class SupplierPage extends React.Component {
                     address: suppliers[supplier].address,
                     add:<MDBBtn color="purple" size="sm" id={supplier} onClick={this.addItem}>Add Item</MDBBtn>,
                     view:<MDBBtn color="green" size="sm" id={supplier} onClick={this.viewItems}>View Items</MDBBtn>,
-                    update:<MDBBtn color="yellow" size="sm" id={supplier} >Update</MDBBtn>,
+                    update:<MDBBtn color="yellow" size="sm" id={supplier} onClick={this.updateSupplier}>Update</MDBBtn>,
                     delete:<MDBBtn color="red" size="sm" id={supplier} >Delete</MDBBtn>
                 });
             }

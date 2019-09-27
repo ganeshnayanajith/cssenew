@@ -107,7 +107,7 @@ class SupplierAddItemPage extends Component {
                                     itemPaymentType: ''
                                 });
 
-                                Swal("Success !", "Item Added Sucessfull !", "success");
+                                Swal("Success !", "Item Added Successfully !", "success");
 
                             })
                             .catch(error => {
