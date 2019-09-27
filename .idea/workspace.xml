@@ -3,8 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="719d8b01-8e84-4dea-9a16-bd06b2fba162" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/pages/SupplierAddItemPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/SupplierAddItemPage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/pages/SupplierPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/SupplierPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,7 +28,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/pages" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="prettierjs.PrettierConfiguration.Package" value="D:\VirtualDesktop\csseworksapcemdb\node_modules\prettier" />
-    <property name="settings.editor.selected.configurable" value="preferences.general" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -55,7 +58,9 @@
       <option name="presentableId" value="Default" />
       <updated>1569269187427</updated>
       <workItem from="1569269189538" duration="1765000" />
-      <workItem from="1569291556971" duration="21193000" />
+      <workItem from="1569291556971" duration="21599000" />
+      <workItem from="1569567480901" duration="2932000" />
+      <workItem from="1569570829093" duration="8046000" />
     </task>
     <servers />
   </component>
