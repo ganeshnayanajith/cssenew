@@ -17,6 +17,7 @@ class SupplierUpdatePage extends Component {
         this.onChangeContact = this.onChangeContact.bind(this);
         this.onChangeAddress = this.onChangeAddress.bind(this);
 
+        this.onClickBack = this.onClickBack.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
@@ -87,6 +88,10 @@ class SupplierUpdatePage extends Component {
         });
     }
 
+    onClickBack(e){
+        this.props.history.push("/supplier");
+    }
+
     onSubmit(e) {
 
 
@@ -154,9 +159,19 @@ class SupplierUpdatePage extends Component {
 
         return (
 
-            <MDBContainer>
+            <MDBContainer fluid>
+
                 <MDBRow>
-                    <MDBCol md="6">
+                    <MDBCol lg="4" className="mb-5">
+                        <div className="d-flex justify-content-end float-lg-left">
+                            <MDBBtn color="blue" onClick={this.onClickBack}>Back</MDBBtn>
+                        </div>
+                    </MDBCol>
+                </MDBRow>
+
+
+                <MDBRow>
+                    <MDBCol lg="8" className="mb-5">
                         <MDBCard>
                             <MDBCardBody>
                                 <form>

@@ -5,6 +5,7 @@ import SupplierPage from './pages/SupplierPage';
 import SupplierAddPage from './pages/SupplierAddPage';
 import SupplierUpdatePage from './pages/SupplierUpdatePage';
 import SupplierAddItemPage from './pages/SupplierAddItemPage';
+import SupplierUpdateItemPage from './pages/SupplierUpdateItemPage';
 import SupplierViewItemsPage from './pages/SupplierViewItemsPage';
 import ProfilePage from './pages/ProfilePage';
 import TablesPage from './pages/TablesPage';
@@ -20,6 +21,7 @@ class Routes extends React.Component {
                 <Route path='/supplieradd' component={SupplierAddPage}/>
                 <Route path='/supplierupdate/:id' component={SupplierUpdatePage}/>
                 <Route path='/supplieradditem/:id' component={SupplierAddItemPage}/>
+                <Route path='/supplierupdateitem/:supplierid/:itemid' component={SupplierUpdateItemPage}/>
                 <Route path='/supplierviewitems/:id' component={SupplierViewItemsPage}/>
                 <Route path='/profile' component={ProfilePage}/>
                 <Route path='/tables' component={TablesPage}/>

@@ -1,12 +1,19 @@
 import React from 'react'
 import {MDBCard, MDBCol, MDBRow, MDBCardBody, MDBBtn, MDBDataTable, MDBContainer} from 'mdbreact';
 import FirebaseDB from "../../Firebase";
+import Swal from "sweetalert";
 
 class SupplierViewItemsPage extends React.Component {
 
     constructor(props) {
         super(props);
 
+        this.suppliersRef="";
+
+        this.updateItem = this.updateItem.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
+
+        this.onClickBack = this.onClickBack.bind(this);
 
         this.state = {
             supplierId: '',
@@ -47,7 +54,6 @@ class SupplierViewItemsPage extends React.Component {
 
 
 
-
     componentDidMount() {
         document.title = "Items";
 
@@ -59,12 +65,8 @@ class SupplierViewItemsPage extends React.Component {
             supplierId: supplierId
         });
 
-
-
-        const suppliersRef = FirebaseDB.database().ref('suppliers/'+supplierId+'/items');
-        //const itemRef=suppliersRef.child(this.state.supplierId).child("items");
-        suppliersRef.on('value', (snapshot) => {
-
+        this.suppliersRef = FirebaseDB.database().ref('suppliers/'+supplierId+'/items');
+        this.suppliersRef.on('value', (snapshot) => {
 
             var items = snapshot.val();
             var newitems = [];
@@ -74,8 +76,8 @@ class SupplierViewItemsPage extends React.Component {
                     itemUnit: items[item].itemUnit,
                     itemUnitPrice: items[item].itemUnitPrice,
                     itemPaymentType: items[item].itemPaymentType,
-                    update:<MDBBtn color="yellow" size="sm" id={item} >Update</MDBBtn>,
-                    delete:<MDBBtn color="red" size="sm" id={item} >Delete</MDBBtn>
+                    update:<MDBBtn color="yellow" size="sm" id={item} onClick={this.updateItem}>Update</MDBBtn>,
+                    delete:<MDBBtn color="red" size="sm" id={item}  onClick={this.deleteItem}>Delete</MDBBtn>
                 });
             }
             this.setState({
@@ -101,11 +103,8 @@ class SupplierViewItemsPage extends React.Component {
             supplierId: supplierId
         });
 
-
-
-        const suppliersRef = FirebaseDB.database().ref('suppliers/'+supplierId+'/items');
-        suppliersRef.on('value', (snapshot) => {
-
+        this.suppliersRef = FirebaseDB.database().ref('suppliers/'+supplierId+'/items');
+        this.suppliersRef.on('value', (snapshot) => {
 
             var items = snapshot.val();
             var newitems = [];
@@ -115,8 +114,8 @@ class SupplierViewItemsPage extends React.Component {
                     itemUnit: items[item].itemUnit,
                     itemUnitPrice: items[item].itemUnitPrice,
                     itemPaymentType: items[item].itemPaymentType,
-                    update:<MDBBtn color="yellow" size="sm" id={item} >Update</MDBBtn>,
-                    delete:<MDBBtn color="red" size="sm" id={item} >Delete</MDBBtn>
+                    update:<MDBBtn color="yellow" size="sm" id={item} onClick={this.updateItem}>Update</MDBBtn>,
+                    delete:<MDBBtn color="red" size="sm" id={item}  onClick={this.deleteItem}>Delete</MDBBtn>
                 });
             }
             this.setState({
@@ -132,12 +131,52 @@ class SupplierViewItemsPage extends React.Component {
     };
 
 
+    updateItem(e) {
+        console.log(e.target.id);
+        this.props.history.push("/supplierupdateitem/"+this.state.supplierId+"/" + e.target.id);
+    };
+
+    deleteItem(e) {
+        console.log(e.target.id);
+        let itemId = e.target.id;
+
+
+        Swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this data",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+
+                    this.suppliersRef.child(itemId).remove();
+                    Swal("Success !", "Item Deleted Successfully !", "success");
+                }
+            });
+    };
+
+
+    onClickBack(e){
+        this.props.history.push("/supplier");
+    }
+
 
     render() {
 
         return (
 
             <MDBContainer fluid>
+
+                <MDBRow>
+                    <MDBCol lg="4" className="mb-5">
+                        <div className="d-flex justify-content-end float-lg-left">
+                            <MDBBtn color="blue" onClick={this.onClickBack}>Back</MDBBtn>
+                        </div>
+                    </MDBCol>
+                </MDBRow>
+
 
                 <MDBRow>
                     <MDBCol lg="12" className="mb-5">

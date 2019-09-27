@@ -10,13 +10,13 @@ const itemUnitOptions = [
     {value: 'vanilla', label: 'Vanilla'},
 ];
 
-class SupplierAddItemPage extends Component {
+class SupplierUpdateItemPage extends Component {
 
 
     constructor(props) {
         super(props);
 
-        this.database = FirebaseDB.database().ref().child('suppliers');
+        this.suppliersRef = "";
 
         this.onChangeItemName = this.onChangeItemName.bind(this);
         this.onChangeItemUnit = this.onChangeItemUnit.bind(this);
@@ -31,21 +31,41 @@ class SupplierAddItemPage extends Component {
             itemUnit: 'Select Unit',
             itemUnitPrice: '',
             itemPaymentType: 'Select Type',
-            supplierId: ''
+            supplierId: '',
+            itemId: ''
         }
-
     }
 
     componentDidMount() {
 
         let currentUrl = window.location.href;
         let supplierId = (currentUrl.split('/')[4]);
+        let itemId = (currentUrl.split('/')[5]);
         console.log(currentUrl);
         console.log(supplierId);
+        console.log(itemId);
         this.setState({
-            supplierId: supplierId
+            supplierId: supplierId,
+            itemId:itemId
         });
 
+
+        this.suppliersRef = FirebaseDB.database().ref('suppliers/' + supplierId+'/items/'+itemId);
+        this.suppliersRef.on('value', (snapshot) => {
+
+
+            console.log(snapshot.val());
+            var item = snapshot.val();
+
+            this.setState({
+
+                itemName: item.itemName,
+                itemUnit: item.itemUnit,
+                itemUnitPrice:item.itemUnitPrice,
+                itemPaymentType: item.itemPaymentType
+            });
+
+        });
     }
 
     onChangeItemName(e) {
@@ -75,7 +95,7 @@ class SupplierAddItemPage extends Component {
     }
 
     onClickBack(e){
-        this.props.history.push("/supplier");
+        this.props.history.push("/supplierviewitems/"+this.state.supplierId);
     }
 
     onSubmit(e) {
@@ -101,7 +121,13 @@ class SupplierAddItemPage extends Component {
                     if (this.state.itemPaymentType !== '' && this.state.itemPaymentType !== null) {
 
 
-                        this.database.child(this.state.supplierId).child("items").push().set(item)
+
+                        this.suppliersRef.update({
+                            itemName: this.state.itemName,
+                            itemUnit: this.state.itemUnit,
+                            itemUnitPrice: this.state.itemUnitPrice,
+                            itemPaymentType: this.state.itemPaymentType
+                        })
                             .then(response => {
                                 console.log(response);
 
@@ -112,7 +138,7 @@ class SupplierAddItemPage extends Component {
                                     itemPaymentType: ''
                                 });
 
-                                Swal("Success !", "Item Added Successfully !", "success");
+                                Swal("Success !", "Item Updated Successfully !", "success");
                                 this.props.history.push("/supplierviewitems/" +this.state.supplierId);
 
                             })
@@ -156,7 +182,7 @@ class SupplierAddItemPage extends Component {
                         <MDBCard>
                             <MDBCardBody>
                                 <form>
-                                    <p className="h4 text-center mb-4">Add A Item</p>
+                                    <p className="h4 text-center mb-4">Update Item</p>
                                     <label className="grey-text">
                                         item Name
                                     </label>
@@ -207,7 +233,7 @@ class SupplierAddItemPage extends Component {
                                         <option value="rent">Rent</option>
                                     </select>
                                     <div className="text-center mt-4">
-                                        <MDBBtn color="indigo" type="button" onClick={this.onSubmit}>Add
+                                        <MDBBtn color="indigo" type="button" onClick={this.onSubmit}>Update
                                             Item</MDBBtn>
                                     </div>
                                 </form>
@@ -226,4 +252,4 @@ class SupplierAddItemPage extends Component {
 };
 
 
-export default SupplierAddItemPage;
+export default SupplierUpdateItemPage;
