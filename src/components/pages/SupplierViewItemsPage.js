@@ -1,5 +1,5 @@
 import React from 'react'
-import {MDBCard, MDBCol, MDBRow, MDBCardBody, MDBBtn, MDBDataTable, MDBContainer} from 'mdbreact';
+import {MDBCard, MDBCol, MDBRow, MDBCardBody, MDBBtn, MDBDataTable, MDBContainer, MDBIcon} from 'mdbreact';
 import FirebaseDB from "../../Firebase";
 import Swal from "sweetalert";
 
@@ -8,7 +8,7 @@ class SupplierViewItemsPage extends React.Component {
     constructor(props) {
         super(props);
 
-        this.suppliersRef="";
+        this.suppliersRef = "";
 
         this.updateItem = this.updateItem.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
@@ -17,6 +17,7 @@ class SupplierViewItemsPage extends React.Component {
 
         this.state = {
             supplierId: '',
+            supplierName: '',
             data: [],
             rows: [],
             columns: [
@@ -52,8 +53,6 @@ class SupplierViewItemsPage extends React.Component {
     }//end of constructor
 
 
-
-
     componentDidMount() {
         document.title = "Items";
 
@@ -65,7 +64,14 @@ class SupplierViewItemsPage extends React.Component {
             supplierId: supplierId
         });
 
-        this.suppliersRef = FirebaseDB.database().ref('suppliers/'+supplierId+'/items');
+        this.supplierRef = FirebaseDB.database().ref('suppliers/' + supplierId);
+        this.supplierRef.on('value', (snap) => {
+            this.setState({
+                supplierName: snap.val().name
+            });
+        });
+
+        this.suppliersRef = FirebaseDB.database().ref('suppliers/' + supplierId + '/items');
         this.suppliersRef.on('value', (snapshot) => {
 
             var items = snapshot.val();
@@ -76,8 +82,8 @@ class SupplierViewItemsPage extends React.Component {
                     itemUnit: items[item].itemUnit,
                     itemUnitPrice: items[item].itemUnitPrice,
                     itemPaymentType: items[item].itemPaymentType,
-                    update:<MDBBtn color="yellow" size="sm" id={item} onClick={this.updateItem}>Update</MDBBtn>,
-                    delete:<MDBBtn color="red" size="sm" id={item}  onClick={this.deleteItem}>Delete</MDBBtn>
+                    update: <MDBBtn color="yellow" size="sm" id={item} onClick={this.updateItem}>Update</MDBBtn>,
+                    delete: <MDBBtn color="red" size="sm" id={item} onClick={this.deleteItem}>Delete</MDBBtn>
                 });
             }
             this.setState({
@@ -103,7 +109,14 @@ class SupplierViewItemsPage extends React.Component {
             supplierId: supplierId
         });
 
-        this.suppliersRef = FirebaseDB.database().ref('suppliers/'+supplierId+'/items');
+        this.supplierRef = FirebaseDB.database().ref('suppliers/' + supplierId);
+        this.supplierRef.on('value', (snap) => {
+            this.setState({
+                supplierName: snap.val().name
+            });
+        });
+
+        this.suppliersRef = FirebaseDB.database().ref('suppliers/' + supplierId + '/items');
         this.suppliersRef.on('value', (snapshot) => {
 
             var items = snapshot.val();
@@ -114,8 +127,8 @@ class SupplierViewItemsPage extends React.Component {
                     itemUnit: items[item].itemUnit,
                     itemUnitPrice: items[item].itemUnitPrice,
                     itemPaymentType: items[item].itemPaymentType,
-                    update:<MDBBtn color="yellow" size="sm" id={item} onClick={this.updateItem}>Update</MDBBtn>,
-                    delete:<MDBBtn color="red" size="sm" id={item}  onClick={this.deleteItem}>Delete</MDBBtn>
+                    update: <MDBBtn color="yellow" size="sm" id={item} onClick={this.updateItem}>Update</MDBBtn>,
+                    delete: <MDBBtn color="red" size="sm" id={item} onClick={this.deleteItem}>Delete</MDBBtn>
                 });
             }
             this.setState({
@@ -133,7 +146,7 @@ class SupplierViewItemsPage extends React.Component {
 
     updateItem(e) {
         console.log(e.target.id);
-        this.props.history.push("/supplierupdateitem/"+this.state.supplierId+"/" + e.target.id);
+        this.props.history.push("/supplierupdateitem/" + this.state.supplierId + "/" + e.target.id);
     };
 
     deleteItem(e) {
@@ -158,7 +171,7 @@ class SupplierViewItemsPage extends React.Component {
     };
 
 
-    onClickBack(e){
+    onClickBack(e) {
         this.props.history.push("/supplier");
     }
 
@@ -170,13 +183,16 @@ class SupplierViewItemsPage extends React.Component {
             <MDBContainer fluid>
 
                 <MDBRow>
-                    <MDBCol lg="4" className="mb-5">
-                        <div className="d-flex justify-content-end float-lg-left">
-                            <MDBBtn color="blue" onClick={this.onClickBack}>Back</MDBBtn>
+                    <MDBCol lg="12" className="mb-5">
+                        <div>
+                            <MDBCard>
+                                <MDBCardBody>
+                                    <MDBIcon icon="chevron-circle-left" onClick={this.onClickBack}/> &nbsp; Supplier : {this.state.supplierName}
+                                </MDBCardBody>
+                            </MDBCard>
                         </div>
                     </MDBCol>
                 </MDBRow>
-
 
                 <MDBRow>
                     <MDBCol lg="12" className="mb-5">
